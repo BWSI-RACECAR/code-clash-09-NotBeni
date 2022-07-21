@@ -22,44 +22,37 @@ Input: “.ON0123” ; Output: 24
 Input: “.BC.234” ; Output: 168
 """
 
+def perms(total_number, number_of_objects):
+    
+    prob = 1
+
+    for n in range(number_of_objects):
+
+        prob *= total_number
+        total_number += 1
+
+    return prob
+
 class Solution:
-    def licensePlate(self,str):
+    def licensePlate(self,str,len_lett: int = 3, len_num: int =4):
         # type str: string
         # return: int
         
         # TODO: Write code below to return an int with the solution to the prompt
-        letters = str[:3]
-        numbers = str[3:7]
-        counter = 0
-        poss = 1
+        letters = str[:len_lett]
+        numbers = str[len_lett:len_lett+len_num]
+        l_counter = 0
+        n_counter = 0
 
         for i in letters:
             if i == ".":
-                counter += 1
-        
-        if counter == 1:
-            poss *= 24
-        elif counter == 2:
-            poss *= 25*24
-        elif counter == 3:
-            poss *= 26*25*24
-
-        counter = 0
+                l_counter += 1
 
         for n in numbers:
             if n == ".":
-                counter += 1
+                n_counter += 1
         
-        if counter == 1:
-            poss *= 7
-        elif counter == 2:
-            poss *= 8*7
-        elif counter == 3:
-            poss *= 9*8*7
-        elif counter == 4:
-            poss *= 10*9*8*7
-        
-        return poss
+        return perms(26-len(letters)+l_counter, l_counter) * perms(10-len(numbers)+n_counter, n_counter)
 
 
 
