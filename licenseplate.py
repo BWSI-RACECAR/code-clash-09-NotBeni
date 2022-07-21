@@ -28,8 +28,10 @@ def perms(total_number, number_of_objects):
 
     for n in range(number_of_objects):
 
+
+        print(total_number)
         prob *= total_number
-        total_number += 1
+        total_number -= 1
 
     return prob
 
